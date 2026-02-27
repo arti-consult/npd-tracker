@@ -31,6 +31,7 @@
     --chart-label: #374151;
     --chart-axis: #9ca3af;
     --chart-axis-label: #4b5563;
+    --chart-iso: #6b7280;
 
     --scrollbar-track: transparent;
     --scrollbar-thumb: #d1d5db;
@@ -67,6 +68,7 @@
     --chart-label: #e5e7eb;
     --chart-axis: #6b7280;
     --chart-axis-label: #9ca3af;
+    --chart-iso: #525252;
 
     --scrollbar-track: transparent;
     --scrollbar-thumb: #27272a;

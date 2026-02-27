@@ -144,11 +144,11 @@ export const ATTRACTIVENESS_CRITERIA = [
   },
   {
     key: "estimatedInvestment" as const,
-    label: "Estimert investering",
-    description: "Hvor mye investering kreves?",
-    low: "2 MNOK+",
-    high: "< 200k",
-    lowLabel: "1 = 2 MNOK+",
-    highLabel: "5 = <200k",
+    label: "Estimert tidsbruk",
+    description: "Hvor mye tid kreves?",
+    low: "2 måneder+",
+    high: "Under en uke",
+    lowLabel: "1 = 2 mnd+",
+    highLabel: "5 = < 1 uke",
   },
 ];

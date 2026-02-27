@@ -101,27 +101,31 @@ const SEED_DATA = [
 ];
 
 export async function POST() {
-  await ensureDb();
-  // Use a transaction to prevent race conditions from concurrent calls
-  const result = await prisma.$transaction(async (tx) => {
-    const count = await tx.product.count();
-    if (count > 0) {
-      return { message: "Database already seeded", count, seeded: false };
-    }
+  try {
+    await ensureDb();
+    // Use a transaction to prevent race conditions from concurrent calls
+    const result = await prisma.$transaction(async (tx) => {
+      const count = await tx.product.count();
+      if (count > 0) {
+        return { message: "Database already seeded", count, seeded: false };
+      }
 
-    for (const item of SEED_DATA) {
-      await tx.product.create({
-        data: {
-          ...item,
-          markets: JSON.stringify(item.markets),
-          feasibility: JSON.stringify(item.feasibility),
-          attractiveness: JSON.stringify(item.attractiveness),
-        },
-      });
-    }
+      for (const item of SEED_DATA) {
+        await tx.product.create({
+          data: {
+            ...item,
+            markets: JSON.stringify(item.markets),
+            feasibility: JSON.stringify(item.feasibility),
+            attractiveness: JSON.stringify(item.attractiveness),
+          },
+        });
+      }
 
-    return { message: "Seeded successfully", count: SEED_DATA.length, seeded: true };
-  });
+      return { message: "Seeded successfully", count: SEED_DATA.length, seeded: true };
+    });
 
-  return NextResponse.json(result, { status: result.seeded ? 201 : 200 });
+    return NextResponse.json(result, { status: result.seeded ? 201 : 200 });
+  } catch (error) {
+    return NextResponse.json({ error: String(error), dbUrl: process.env.DATABASE_URL?.substring(0, 20) }, { status: 500 });
+  }
 }

@@ -28,9 +28,13 @@ function dbToProduct(row: {
 }
 
 export async function GET() {
-  await ensureDb();
-  const rows = await prisma.product.findMany({ orderBy: { createdAt: "asc" } });
-  return NextResponse.json(rows.map(dbToProduct));
+  try {
+    await ensureDb();
+    const rows = await prisma.product.findMany({ orderBy: { createdAt: "asc" } });
+    return NextResponse.json(rows.map(dbToProduct));
+  } catch (error) {
+    return NextResponse.json({ error: String(error) }, { status: 500 });
+  }
 }
 
 export async function POST(request: Request) {

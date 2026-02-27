@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
+import { prisma, ensureDb } from "@/lib/prisma";
 import { Product } from "@/lib/types";
 
 function dbToProduct(row: {
@@ -28,11 +28,13 @@ function dbToProduct(row: {
 }
 
 export async function GET() {
+  await ensureDb();
   const rows = await prisma.product.findMany({ orderBy: { createdAt: "asc" } });
   return NextResponse.json(rows.map(dbToProduct));
 }
 
 export async function POST(request: Request) {
+  await ensureDb();
   const body = await request.json();
   const row = await prisma.product.create({
     data: {

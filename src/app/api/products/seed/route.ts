@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
+import { prisma, ensureDb } from "@/lib/prisma";
 
 const SEED_DATA = [
   {
@@ -101,6 +101,7 @@ const SEED_DATA = [
 ];
 
 export async function POST() {
+  await ensureDb();
   // Use a transaction to prevent race conditions from concurrent calls
   const result = await prisma.$transaction(async (tx) => {
     const count = await tx.product.count();

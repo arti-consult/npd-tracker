@@ -1,0 +1,16 @@
+-- CreateTable
+CREATE TABLE "Product" (
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "name" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+    "owner" TEXT NOT NULL,
+    "isOngoing" BOOLEAN NOT NULL DEFAULT false,
+    "isNew" BOOLEAN NOT NULL DEFAULT false,
+    "isDerivative" BOOLEAN NOT NULL DEFAULT false,
+    "markets" TEXT NOT NULL,
+    "feasibility" TEXT NOT NULL,
+    "attractiveness" TEXT NOT NULL,
+    "comments" TEXT NOT NULL DEFAULT '',
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" DATETIME NOT NULL
+);

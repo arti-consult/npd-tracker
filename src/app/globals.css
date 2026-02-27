@@ -1,26 +1,110 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
+@layer base {
+  /* Light theme (default) */
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+    --bg-primary: #ffffff;
+    --bg-secondary: #f9fafb;
+    --bg-card: #f3f4f6;
+    --bg-input: #f3f4f6;
+    --bg-hover: #e5e7eb;
+    --bg-header: rgba(255, 255, 255, 0.8);
+    --bg-tag: #e5e7eb;
+    --bg-row-hover: rgba(0, 0, 0, 0.03);
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    --text-primary: #111827;
+    --text-secondary: #4b5563;
+    --text-tertiary: #6b7280;
+    --text-muted: #9ca3af;
+    --text-inverse: #ffffff;
+
+    --border-primary: #e5e7eb;
+    --border-secondary: #d1d5db;
+
+    --chart-grid: rgba(0, 0, 0, 0.06);
+    --chart-ref: rgba(0, 0, 0, 0.15);
+    --chart-label: #374151;
+    --chart-axis: #9ca3af;
+    --chart-axis-label: #4b5563;
+
+    --scrollbar-track: transparent;
+    --scrollbar-thumb: #d1d5db;
+    --scrollbar-thumb-hover: #9ca3af;
+
+    --selection-bg: rgba(34, 197, 94, 0.2);
+    --selection-color: #111827;
+
+    --accent: #10b981;
+  }
+
+  /* Dark theme */
+  .dark {
+    --bg-primary: #09090b;
+    --bg-secondary: rgba(17, 17, 17, 0.5);
+    --bg-card: rgba(39, 39, 42, 0.4);
+    --bg-input: rgba(39, 39, 42, 0.6);
+    --bg-hover: #374151;
+    --bg-header: rgba(9, 9, 11, 0.8);
+    --bg-tag: #1f2937;
+    --bg-row-hover: rgba(255, 255, 255, 0.03);
+
+    --text-primary: #fafafa;
+    --text-secondary: #9ca3af;
+    --text-tertiary: #6b7280;
+    --text-muted: #4b5563;
+    --text-inverse: #111827;
+
+    --border-primary: #27272a;
+    --border-secondary: #374151;
+
+    --chart-grid: rgba(255, 255, 255, 0.06);
+    --chart-ref: rgba(255, 255, 255, 0.15);
+    --chart-label: #e5e7eb;
+    --chart-axis: #6b7280;
+    --chart-axis-label: #9ca3af;
+
+    --scrollbar-track: transparent;
+    --scrollbar-thumb: #27272a;
+    --scrollbar-thumb-hover: #3f3f46;
+
+    --selection-bg: rgba(34, 197, 94, 0.3);
+    --selection-color: white;
+
+    --accent: #10b981;
+  }
+
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-thumb-hover);
+  }
+
+  /* Selection */
+  ::selection {
+    background: var(--selection-bg);
+    color: var(--selection-color);
+  }
 }

@@ -1,0 +1,25 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  owner       String
+  isOngoing   Boolean  @default(false)
+  isNew       Boolean  @default(false)
+  isDerivative Boolean @default(false)
+  markets     String   // JSON array stored as string
+  feasibility String   // JSON object stored as string
+  attractiveness String // JSON object stored as string
+  comments    String   @default("")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
